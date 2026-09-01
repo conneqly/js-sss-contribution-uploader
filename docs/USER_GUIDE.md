@@ -399,6 +399,14 @@ Yes. Loading a CSV always starts fresh. If some rows were already saved on the p
 
 The script works on whichever employer account is currently logged in. Log in to the correct account before starting.
 
+### Does this script collect or send my data anywhere?
+
+**No.** The script runs **100% inside your own browser**. Your CSV data, employee names, SSS numbers, contribution amounts — none of it is ever sent to any external server, database, or third party. Everything stays on your computer and goes directly to the SSS portal, exactly as if you typed it in yourself.
+
+### Can this script see or steal my SSS login password?
+
+**No.** The script does not access, read, store, or transmit your login credentials in any way. It only activates **after** you have already logged in to the SSS Employer Portal on your own. It has no access to your username, password, or session tokens. You can verify this yourself — the full source code is open and readable.
+
 ---
 
 > **Need help?** Contact your system administrator or reach out at [conneqly.com](https://conneqly.com).
