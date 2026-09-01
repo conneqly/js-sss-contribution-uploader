@@ -47,13 +47,46 @@ Tampermonkey is a free Chrome extension that lets you run custom scripts on web 
 
 > **💡 Tip:** If you don't see the icon, click the puzzle-piece icon (🧩) in the toolbar and pin Tampermonkey so it's always visible.
 
+### ⚠️ Enable Developer Mode (Required)
+
+Chrome blocks userscript extensions like Tampermonkey by default. **You must enable Developer Mode** or Tampermonkey will not work — scripts will silently fail to run.
+
+1. In Chrome, go to the extensions page:
+   👉 Type `chrome://extensions` in the address bar and press Enter
+2. In the **top-right corner** of the page, toggle **"Developer mode"** to **ON**
+3. If you see a prompt or banner asking to **"Allow user scripts"**, click **Allow**
+4. **Restart Chrome** (close all Chrome windows and reopen)
+
+> **🚨 This is the most common reason the uploader panel doesn't appear.** If you skip this step, Tampermonkey is installed but cannot actually run any scripts. You will not see any error — it just won't work.
+
 ---
 
 ## 3. Install the SSS Contribution Uploader Script
 
 Now you need to add the uploader script to Tampermonkey.
 
-### Steps
+### Option A — Import from URL (Recommended)
+
+This is the easiest way. You paste a link and Tampermonkey downloads the script for you.
+
+1. Click the **Tampermonkey icon** in your Chrome toolbar
+2. Click **"Dashboard"**
+3. Go to the **"Utilities"** tab
+4. Find the section labeled **"Import from URL"**
+5. Paste this URL into the text box:
+
+   ```
+   https://raw.githubusercontent.com/conneqly/js-sss-contribution-uploader/main/src/sss-contribution-uploader.user.js
+   ```
+
+6. Click **"Install"**
+7. Tampermonkey will show you the script contents — click **"Install"** again to confirm
+
+> **✅ Done!** The script is now installed. It will activate automatically whenever you visit the SSS Employer Portal dashboard.
+
+### Option B — Copy and Paste (Alternative)
+
+If the URL method doesn't work, you can manually copy the script:
 
 1. Open the script file: [`sss-contribution-uploader.user.js`](../src/sss-contribution-uploader.user.js)
 2. **Select all** the text in the file (press `Ctrl + A` on Windows or `Cmd + A` on Mac)
@@ -64,8 +97,6 @@ Now you need to add the uploader script to Tampermonkey.
 7. **Paste** the script you copied (press `Ctrl + V` or `Cmd + V`)
 8. Press `Ctrl + S` (or `Cmd + S`) to **save** the script
 9. You should see a confirmation that the script was saved
-
-> **✅ Done!** The script is now installed. It will activate automatically whenever you visit the SSS Employer Portal dashboard.
 
 ### How to Verify It's Installed
 
@@ -293,6 +324,7 @@ If you need to stop a Dry Run or Live Update while it's running:
 
 | Possible Cause | Solution |
 |---|---|
+| Developer Mode is not enabled | Go to `chrome://extensions`, turn on **Developer mode** (top-right), allow user scripts, and restart Chrome. See [Step 2](#2-install-tampermonkey). |
 | Tampermonkey is disabled | Click the Tampermonkey icon → make sure it says "Enabled" |
 | The script is turned off | Open Tampermonkey Dashboard → check that the script toggle is ON |
 | You're not on the dashboard page | The script only works on `https://employer.sss.gov.ph/employer/auth/dashboard` |

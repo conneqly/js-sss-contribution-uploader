@@ -20,9 +20,13 @@ A browser-based tool that automates uploading employee SSS contribution amounts 
 ## Quick Start
 
 1. Install **Tampermonkey** in Chrome → [chrome.google.com/webstore](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-2. Open [`src/sss-contribution-uploader.user.js`](src/sss-contribution-uploader.user.js) and click **"Raw"** (or copy-paste its contents into a new Tampermonkey script)
-3. Log in to the [SSS Employer Portal](https://employer.sss.gov.ph) dashboard
-4. The **SSS Contribution Uploader** panel appears in the upper-right corner — load your CSV and go
+2. Enable **Developer Mode** in `chrome://extensions` (required for Tampermonkey to work)
+3. In Tampermonkey, go to **Dashboard → Utilities → Import from URL** and paste:
+   ```
+   https://raw.githubusercontent.com/conneqly/js-sss-contribution-uploader/main/src/sss-contribution-uploader.user.js
+   ```
+4. Log in to the [SSS Employer Portal](https://employer.sss.gov.ph) dashboard
+5. The **SSS Contribution Uploader** panel appears in the upper-right corner — load your CSV and go
 
 ## CSV Format
 
