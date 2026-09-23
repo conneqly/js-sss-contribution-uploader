@@ -91,6 +91,12 @@
         padding: 12px 14px;
         border-bottom: 1px solid #374151;
         background: linear-gradient(180deg, #1f2937, #111827);
+        cursor: grab;
+        touch-action: none;
+        user-select: none;
+      }
+      #${CONFIG.panelId} .sss-header:active {
+        cursor: grabbing;
       }
       #${CONFIG.panelId} .sss-title {
         margin: 0;
@@ -211,11 +217,63 @@
   }
 
   function wireEvents() {
+    wirePanelDragging();
     ui.csvInput.addEventListener('change', onFileSelected);
     ui.dryRun.addEventListener('click', () => runBatch('dry-run'));
     ui.liveRun.addEventListener('click', () => runBatch('live'));
     ui.stop.addEventListener('click', requestStop);
     ui.downloadCsv.addEventListener('click', downloadReportCsv);
+  }
+
+  function wirePanelDragging() {
+    const header = ui.panel.querySelector('.sss-header');
+    let drag = null;
+
+    header.addEventListener('pointerdown', (event) => {
+      if (!event.isPrimary || event.button !== 0) {
+        return;
+      }
+
+      const rect = ui.panel.getBoundingClientRect();
+      drag = {
+        pointerId: event.pointerId,
+        offsetX: event.clientX - rect.left,
+        offsetY: event.clientY - rect.top
+      };
+      ui.panel.style.left = `${rect.left}px`;
+      ui.panel.style.top = `${rect.top}px`;
+      ui.panel.style.right = 'auto';
+      header.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    });
+
+    header.addEventListener('pointermove', (event) => {
+      if (!drag || event.pointerId !== drag.pointerId) {
+        return;
+      }
+
+      const maxLeft = Math.max(0, window.innerWidth - ui.panel.offsetWidth);
+      const maxTop = Math.max(0, window.innerHeight - ui.panel.offsetHeight);
+      const left = Math.min(maxLeft, Math.max(0, event.clientX - drag.offsetX));
+      const top = Math.min(maxTop, Math.max(0, event.clientY - drag.offsetY));
+      ui.panel.style.left = `${left}px`;
+      ui.panel.style.top = `${top}px`;
+    });
+
+    const stopDragging = (event) => {
+      if (!drag || event.pointerId !== drag.pointerId) {
+        return;
+      }
+
+      drag = null;
+      if (header.hasPointerCapture(event.pointerId)) {
+        header.releasePointerCapture(event.pointerId);
+      }
+    };
+
+    header.addEventListener('pointerup', stopDragging);
+    header.addEventListener('pointercancel', stopDragging);
+    header.addEventListener('lostpointercapture', stopDragging);
   }
 
   async function onFileSelected(event) {
