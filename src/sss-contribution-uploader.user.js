@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SSS Contribution Uploader
 // @namespace    https://conneqly.com/
-// @version      0.1.7
+// @version      0.1.8
 // @description  Upload SSS contribution CSV rows through the portal with dry-run and live update modes.
 // @author       macoymejia.com
 // @match        https://employer.sss.gov.ph/employer/auth/dashboard*
